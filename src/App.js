@@ -1,24 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React,{useState} from 'react';
+import './Styles/App.css';
+import CodeEditor from './Components/CodeEditor';
+import Visualizer from './Components/Visualizer';
+
+
 
 function App() {
+
+  let worker = new Worker(process.env.PUBLIC_URL + '/worker.js');
+  worker.onmessage = m =>{
+    console.log(`message recibed!`);
+  }
+  worker.onerror = e =>{
+    console.log(`error recibed :(`);
+  }
+
+  const build = (code) =>{
+    worker.terminate();
+    worker = new Worker(process.env.PUBLIC_URL + '/worker.js');
+    worker.postMessage(code);
+  }
+  const [code, setCode] = useState('aaa');
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <CodeEditor code={code} onCodeChange = {(code) => setCode(code)}/>
+      <button onClick={() => build(code)}>Build!</button>
     </div>
   );
 }
