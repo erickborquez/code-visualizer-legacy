@@ -1,11 +1,12 @@
 let worker = new Worker(process.env.PUBLIC_URL + '/worker.js');
 
-const build = (code,setSteps) => {
+const build = (record, setRecord, setStep) => {
     console.log('bulding...');
     let startingTime = new Date().getTime();
     worker = new Worker(process.env.PUBLIC_URL + '/worker.js');
     worker.onmessage = m => {
-        setSteps(m.data);
+        setRecord(m.data);
+        setStep(0);
         worker.terminate();
         console.log(`builded in ${new Date().getTime() - startingTime}ms`);
     }
@@ -13,7 +14,7 @@ const build = (code,setSteps) => {
         console.log(e);
         worker.terminate();
     }
-    worker.postMessage(code);
+    worker.postMessage(record);
 }
 
 export default build;
