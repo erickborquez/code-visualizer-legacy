@@ -1,0 +1,19 @@
+.array{
+    border-collapse: collapse;
+}
+.array__element{
+    font-weight: 500;
+    padding: 15px;
+    border:1px solid rgba(0,0,0,.2);
+}
+
+.array__indexer{
+    color:rgba(0,0,0,.3);
+}
+.array__indexer--y{
+ 
+    padding: 0 5px;
+}
+.array__indexer--x{
+    padding: 5px 0;
+}
