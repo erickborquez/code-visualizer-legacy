@@ -1,53 +1,61 @@
 onmessage = (m) => {
-    /*let newArray = [1,2,3,4,5,6];
-    let array = new Array1D(newArray);
-    console.log(array.elements);
-    array.highlight({element:1, color:'red'},{elements:[0,4], color:'black'});
-    array.update(newArray);
-    */
-    let steps = safeCodeEval(m.data);
-    postMessage(steps);
+    safeCodeEval(m.data);
+}
+
+const generateRandomKey = (first, second ='') => {
+    return `key-${'0' + first + second}=${new Date().getTime()}`
 }
 
 function safeCodeEval(code) {
-    const steps = [];
     // eslint-disable-next-line no-new-func
-    Function('steps', 'Array1D', 'AlgortihmCanvas', '"use strict";' + code)(steps, Array1D, AlgorithmCanvas);
-    return steps;
+    Function('Array1D', 'AlgortihmCanvas', '"use strict";' + code)(Array1D, AlgorithmCanvas);
 }
 
 
 class Array1D {
-    constructor(elements) {
+    constructor(elements, name = 'Arra1D') {
+        this.name = name;
         this.elements = elements;
-        this.changes = [];
+        this.style = [];
+        this.records = [];
+        this.type = 'Array1D';
+        this.key = generateRandomKey(name,this.elements.length);
     }
 
-    update(array = this.elements) {
-        this.elements = array;
+    update(elements = this.elements) {
+        this.elements = elements;
     }
     highlight = (...elements) => {
-        this.changes.push(...elements);
+        this.style.push(...elements);
     }
-    get data() {
-        return { elements: this.elements, changes: this.changes }
+    get getRecord() {
+        return this.record;
     }
-
+    record = () => {
+        this.records.push({ 
+            name:this.name,
+            key:this.key,
+            type:this.type,
+            elements: this.elements, 
+            style: this.style,
+        })
+    }
 }
 
 class AlgorithmCanvas {
     constructor() {
-        this.elements = [];
-        this.steps = [];
+        this.structures = [];
     }
-    watch(...elements) {
-        this.elements.push(...elements);
+    watch(...structures) {
+        this.structures.push(...structures);
     }
     draw() {
-        this.steps.push(
-            ...(this.elements.map(e => e.data))
-        )
+        this.structures.forEach(s => {
+            s.record();
+        });
     }
-
-
+    end() {
+        const records = this.structures.map(s => s.records);
+        postMessage(records);
+    }
 }
