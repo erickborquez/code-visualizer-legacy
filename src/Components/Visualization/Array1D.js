@@ -28,8 +28,9 @@ const Array1D = ({elements = [], style = {}}) => {
                         {elements.map((e,i) =>
                             <td
                                 key={generateRandomKey(e,i)}
-                                className="array__element array__value">
-                                {e}
+                                className="array__element array__value"
+                                style={e.style}>
+                                {e.value}
                             </td>)}
                     </tr>
                 </tbody>
