@@ -1,5 +1,6 @@
 import React from 'react';
 import AceEditor from 'react-ace';
+import '../Styles/CodeEditor.css'
 
 
 import "brace/snippets/javascript";
@@ -14,13 +15,15 @@ function CodeEditor(props) {
                 value={props.code}
                 mode="javascript"
                 theme="monokai"
-                onChange={(code)=> props.onCodeChange(code)}
+                onChange={(code) => props.onCodeChange(code)}
                 name="UNIQUE_ID_OF_DIV"
                 editorProps={{ $blockScrolling: true }}
                 enableBasicAutocompletion={true}
                 enableLiveAutocompletion={true}
                 enableSnippets={true}
-            />
+                className={'codeEditor'}
+                width='100%'
+        />
         </div>
     );
 }
