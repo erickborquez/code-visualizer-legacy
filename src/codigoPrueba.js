@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 
 /////// BUBBLE SORT 
-
+/*
 const records = new AlgorithmCanvas();
 const arrayStructure = new Array1D([], 'bubblesort');
 records.watch(arrayStructure);
@@ -28,3 +28,13 @@ const bubblesort = (array) => {
 bubblesort([5, 4, 3, 2, 1, 34, 5, 2, 3, 52, 1]);
 records.end();
 
+*/
+
+// ARRAY2D TESTS
+
+
+const records = new AlgorithmCanvas();
+const matrix = new Array2D([[1,2],[3,4]],'tests');
+records.watch(matrix);
+records.draw();
+records.end();

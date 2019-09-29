@@ -12,35 +12,13 @@ function App() {
 
 
   const [code, setCode] = useState(`
-  /* eslint-disable no-undef */
 
-  /////// BUBBLE SORT 
-  
   const records = new AlgorithmCanvas();
-  const arrayStructure = new Array1D([], 'bubblesort');
-  records.watch(arrayStructure);
-  
-  const bubblesort = (array) => {
-      arrayStructure.update(array);
-      records.draw();
-      for (let i = 1; i < array.length; i++) {
-          arrayStructure.selectFixed(j => j > array.length - i, 'lul', 'rgba(100,100,100,.4)', 'grey')
-          for (let j = 0; j < array.length - i; j++) {
-              arrayStructure.select([j, j + 1], 'rgba(0,250,253,.3)');
-              records.draw();
-              if (array[j] > array[j + 1]) {
-                  let aux = array[j];
-                  array[j] = array[j + 1];
-                  array[j + 1] = aux;
-                  arrayStructure.select([j, j + 1], 'rgba(0,100,180,.3)');
-                  records.draw();
-              }
-          }
-      }
-  }
-  
-  bubblesort([5, 4, 3, 2, 1, 34, 5, 2, 3, 52, 1]);
+  const matrix = new Array2D([[1,2,4],[3,4],[5,6]],'tests');
+  records.watch(matrix);
+  records.draw();
   records.end();
+  
   `);
 
   useEffect(() => {
@@ -48,6 +26,7 @@ function App() {
   })
 
   const [records, setRecords] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [step, setStep, maxSteps, setMaxSteps, speed, setSpeed, paused, setPaused] = useStep(0);
   useEffect(() => {
     const keyPress = (e) => {
