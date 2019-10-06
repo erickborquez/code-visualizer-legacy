@@ -12,3 +12,24 @@
     display: grid;
     
 }
+.visualizer-control-button{
+    padding: 2rem 3rem;
+    border-radius: 2px;
+    position: relative;
+    background-color: var(--secondary-color-dark);
+    display: inline-block;
+    transition: background-color .3s;
+}
+.visualizer-control-button:hover{
+    cursor: pointer;
+    background-color: var(--secondary-color-dark-hover)
+}
+
+.visualizer-control-svg{
+    fill:var(--secondary-color);
+    width:3rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

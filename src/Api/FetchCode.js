@@ -42,7 +42,8 @@ const fetchCode = (...names) => {
             } else{
                 codes.push({
                     name:"mineSweeper",
-                    code: `const records = new AlgorithmCanvas();
+                    code: `//Buildeas el codigo con CTRL + Enter
+                    const records = new AlgorithmCanvas();
                     const bombMatrix = new Array2D([[1, 0, 1], [0, 1, 0], [1, 0, 1]], 'original');
                     const mines = new Array2D([[]], 'modified');
                     records.watch(bombMatrix, mines);

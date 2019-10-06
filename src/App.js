@@ -4,9 +4,11 @@ import CodeEditor from './Components/CodeEditor';
 import Visualizer from './Components/Visualizer';
 import build from './Api/Build';
 import Header from './Components/Header'
+import Controls from './Components/Controls';
 
 import useStep from './Hooks/useSteps';
 import fetchCode from './Api/FetchCode';
+
 
 
 
@@ -35,20 +37,18 @@ function App() {
 
   const buildCode = () => build(code, setRecords, setStep, setMaxSteps, setPaused);
 
+
   return (
     <div className="App">
 
       <Header />
-        <CodeEditor code={code} setCode={setCode} />
-        {/*
-        <button onClick={() => buildCode()}>Build!</button>
-        <button onClick={() => setStep(Math.min(step + 1, maxSteps))}>Next step bb</button>
-        <button onClick={() => setPaused(!paused)}>Toggle Pause</button>
-        <p>Actual step: {step}</p>
-        */}
+      <CodeEditor code={code} setCode={setCode} />
+      <div className='visualizer'>
+        <Controls step={step} setStep={setStep} maxSteps={maxSteps} speed={speed} setSpeed={setSpeed} paused={paused} setPaused={setPaused} />
         <Visualizer records={records} step={step} />
+      </div>
     </div>
   );
-}
+  }
 
-export default App;
+  export default App;

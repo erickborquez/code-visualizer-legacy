@@ -8,6 +8,7 @@
   --primary-color-light: #d3d3d3;
   --secondary-color: #6D6D6A;
   --secondary-color-hover: #7d7d7d;
+  --secondary-color-dark-hover:#343434;
   --secondary-color-dark: #434340;
   box-sizing: border-box;
   font-size: 62.5%;

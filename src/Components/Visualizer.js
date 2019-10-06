@@ -1,4 +1,5 @@
 import React from 'react';
+import Controls from './Controls'
 import Array1D from './Visualization/Array1D'
 import Array2D from './Visualization/Array2D'
 import '../Styles/Visualizer.css'
@@ -6,9 +7,6 @@ import '../Styles/Visualizer.css'
 const generateRandomKey = (i) => {
     return `key-${i}=${new Date().getTime()}`;
 }
-
-//<Array1D elements={records[0].elements} style={records[0].style}></Array1D>
-//{(records.length > 0 ? <Array1D elements={records[0].elements} style={records[0].style}></Array1D> : null)}  
 
 const Visualizer = ({ records, step }) => {
 
@@ -29,11 +27,9 @@ const Visualizer = ({ records, step }) => {
     });
 
     return (
-        <div className='visualizer'>
-            <div className="visualizer-controls"></div>
-            <div className="visualizer-structures">
-                {structures}
-            </div>
+
+        <div className="visualizer-structures">
+            {structures}
         </div>
     )
 }
