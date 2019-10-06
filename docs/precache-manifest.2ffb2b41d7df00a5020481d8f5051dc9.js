@@ -1,12 +1,11 @@
-/* eslint-disable no-restricted-globals */
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8170cb4facdb3da336073e8cc81c29e6",
+    "revision": "37b63526253f16883615d8df3c13cf13",
     "url": "/el-algoritmo-del-ritmo/index.html"
   },
   {
-    "revision": "28f196096eb7d9f79908",
-    "url": "/el-algoritmo-del-ritmo/static/css/main.047322a9.chunk.css"
+    "revision": "e37b804732975865d601",
+    "url": "/el-algoritmo-del-ritmo/static/css/main.2b81c910.chunk.css"
   },
   {
     "revision": "3a21ebdff38dbabe1118",
@@ -417,8 +416,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/el-algoritmo-del-ritmo/static/js/19.4db23cf5.chunk.js"
   },
   {
-    "revision": "b29c51acc3163d9e32b8",
-    "url": "/el-algoritmo-del-ritmo/static/js/192.801cc5e6.chunk.js"
+    "revision": "f6775d8fd30b0f494c8c",
+    "url": "/el-algoritmo-del-ritmo/static/js/192.ad6a6819.chunk.js"
   },
   {
     "revision": "bd6279037f86bdc59847",
@@ -773,19 +772,43 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/el-algoritmo-del-ritmo/static/js/99.e176d6fd.chunk.js"
   },
   {
-    "revision": "28f196096eb7d9f79908",
-    "url": "/el-algoritmo-del-ritmo/static/js/main.f6904154.chunk.js"
+    "revision": "e37b804732975865d601",
+    "url": "/el-algoritmo-del-ritmo/static/js/main.1b58bdf6.chunk.js"
   },
   {
     "revision": "b18061f8ad135018452d",
     "url": "/el-algoritmo-del-ritmo/static/js/runtime-main.9290a22b.js"
   },
   {
+    "revision": "870690d288f124530703b21807a410c7",
+    "url": "/el-algoritmo-del-ritmo/static/media/back.870690d2.svg"
+  },
+  {
     "revision": "d93204ce3d393b61665298db29db4e6a",
     "url": "/el-algoritmo-del-ritmo/static/media/edit.d93204ce.svg"
   },
   {
+    "revision": "34ad64270469944a598e719cf9c29444",
+    "url": "/el-algoritmo-del-ritmo/static/media/forward.34ad6427.svg"
+  },
+  {
     "revision": "2688d275f453921cdca656941f212ea7",
     "url": "/el-algoritmo-del-ritmo/static/media/logo.2688d275.svg"
+  },
+  {
+    "revision": "58d97c29436abeb5e9bd69c56de26f06",
+    "url": "/el-algoritmo-del-ritmo/static/media/pause.58d97c29.svg"
+  },
+  {
+    "revision": "1cdd1b8d00cdcb5c59d42881607c7d25",
+    "url": "/el-algoritmo-del-ritmo/static/media/play.1cdd1b8d.svg"
+  },
+  {
+    "revision": "533051480121a0fd3fa9df0742c32a93",
+    "url": "/el-algoritmo-del-ritmo/static/media/skip-back.53305148.svg"
+  },
+  {
+    "revision": "148357ac50cc7856ec907dd60f9beabc",
+    "url": "/el-algoritmo-del-ritmo/static/media/skip-forward.148357ac.svg"
   }
 ]);
