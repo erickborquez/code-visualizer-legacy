@@ -1,0 +1,14 @@
+.visualizer{
+    display:grid;
+    grid-template-rows: 6rem 1fr;
+}
+
+.visualizer-controls{
+    background-color: red;
+}
+
+.visualizer-structures{
+    background-color: green;
+    display: grid;
+    
+}
