@@ -63,10 +63,10 @@ class Array1D {
         })
     }
 
-    select = (index, backgroundColor = 'blue', color = 'black') => {
+    select = (index, backgroundColor = 'var(--secondary-color)', color = 'inherit') => {
         this.manualSelect({ index: index, color: color, backgroundColor: backgroundColor });
     }
-    selectFixed = (index, name = 'default', backgroundColor = 'gray', color = 'black') => {
+    selectFixed = (index, name = 'default', backgroundColor = 'rgba(0,0,0,.2)', color = 'rgba(50,50,50,.5)') => {
         this.manualSelectFixed({ index: index, name: name, color: color, backgroundColor: backgroundColor });
     }
 
@@ -158,18 +158,18 @@ class Array2D {
         })
     }
 
-    select = (index, backgroundColor = 'blue', color = 'black') => {
+    select = (index, backgroundColor = 'rgba(230,230,230,.2)', color = 'rgba(250,250,250,.7)') => {
         this.manualSelect({ index: index, color: color, backgroundColor: backgroundColor });
-    }
-    selectFixed = (index, name = 'default', backgroundColor = 'gray', color = 'black') => {
+    } 
+    selectFixed = (index, name = 'default', backgroundColor = 'rgba(100,100,100,.2)', color = 'rgba(180,180,180,.7)') => {
         this.manualSelectFixed({ index: index, name: name, color: color, backgroundColor: backgroundColor });
     }
 
     record = () => {
         let maxSize = this.elements.reduce((max, e) => Math.max(max, e.length), 0);
         const elements = this.elements.map((array1D, x) => {
-            if(array1D.length < maxSize)
-                array1D = [...array1D,...Array(maxSize - array1D.length )];
+            if (array1D.length < maxSize)
+                array1D = [...array1D, ...Array(maxSize - array1D.length)];
             return array1D.map((e, y) => {
                 let style = {}
                 this.fixedStyles.forEach(s => {
