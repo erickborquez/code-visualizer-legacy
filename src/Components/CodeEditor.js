@@ -35,8 +35,8 @@ const CodeEditor = (props) => {
             { value: 'twilight', label: 'Twilight' },
         ],
         fontSize: [
-            { value: '8', label: '8' },
-            { value: '14', label: '14' },
+            { value: '10', label: '10' },
+            { value: '16', label: '16' },
             { value: '20', label: '20' },
             { value: '30', label: '30' },
             { value: '40', label: '40' }

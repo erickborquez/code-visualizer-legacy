@@ -1,5 +1,4 @@
 import React from 'react';
-import Controls from './Controls'
 import Array1D from './Visualization/Array1D'
 import Array2D from './Visualization/Array2D'
 import '../Styles/Visualizer.css'

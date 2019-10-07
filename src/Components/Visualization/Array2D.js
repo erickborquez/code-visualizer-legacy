@@ -1,15 +1,17 @@
 import React from 'react';
-import '../../Styles/ArrayStyle.css'
+import '../../Styles/Visualization/ArrayStyle.css'
+import '../../Styles/Visualization/Structures.css'
 
 
 const generateRandomKey = (first, second = '') => {
     return `key-${'0' + first + second}=${new Date().getTime()}`
 }
 
-const Array2D = ({ elements = [[0]], style = {} }) => {
+const Array2D = ({ elements = [[0]], style = {}, name }) => {
     return (
-        <div>
-            <table className="Array2D" cellSpacing='0'>
+        <div className="structure">
+            <h3 className="structure__name">{name}</h3>
+            <table className="array array2d" cellSpacing='4'>
                 <thead>
                     <tr>
                         <td></td>
@@ -29,9 +31,9 @@ const Array2D = ({ elements = [[0]], style = {} }) => {
                                 {Array1D.map((e, y) =>
                                     <td
                                         key={generateRandomKey(e, y)}
-                                        className="array__element array__value"
+                                        className="array__element"
                                         style={e.style}>
-                                        {e.value}
+                                        <span className="array__value">{e.value}</span>
                                     </td>
                                 )}
                             </tr>
