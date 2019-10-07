@@ -1,0 +1,33 @@
+.array{
+    border-collapse: separate;
+}
+.array__element{
+    font-weight: 600;
+    padding: 1rem;
+    background-color:#4B4C49;
+    margin: 4px;
+    border-radius: 2px;
+    font-size: 2rem;
+    height: 5rem;
+    min-width: 5rem;
+    position: relative;
+}
+.array__value{
+    transform: translate(-50%,-50%);
+    position: absolute;
+    top:50%;
+    left: 50%;
+}
+
+.array__indexer{
+    color:var(--secondary-color);
+    font-size: 1.2rem;
+}
+.array__indexer--y{
+    font-weight: 600;
+    padding-right:10px;
+}
+.array__indexer--x{
+    font-weight: 600;
+    padding-bottom: 5px;
+}
