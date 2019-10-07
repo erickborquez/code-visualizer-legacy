@@ -16,7 +16,7 @@ function App() {
 
   // eslint-disable-next-line no-unused-vars
   const [step, setStep, maxSteps, setMaxSteps, speed, setSpeed, paused, setPaused] = useStep(0);
-  const [code, setCode] = useState(fetchCode('mineSweeper')[0].code);
+  const [code, setCode] = useState(fetchCode('minesweeper')[0].code);
   const [records, setRecords] = useState([]);
 
   useEffect(() => {

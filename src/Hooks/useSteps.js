@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 
 const useStep = (startingStep = 0, lastStep = 0) => {
     const [step, setStep] = useState(startingStep);
-    const [speed, setSpeed] = useState(1000);
+    const [speed, setSpeed] = useState(300);
     const [paused, setPaused] = useState(true);
     const [maxSteps, setMaxSteps] = useState(lastStep);
 

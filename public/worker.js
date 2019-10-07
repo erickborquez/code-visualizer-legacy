@@ -160,7 +160,7 @@ class Array2D {
 
     select = (index, backgroundColor = 'rgba(230,230,230,.2)', color = 'rgba(250,250,250,.7)') => {
         this.manualSelect({ index: index, color: color, backgroundColor: backgroundColor });
-    }
+    } 
     selectFixed = (index, name = 'default', backgroundColor = 'rgba(100,100,100,.2)', color = 'rgba(180,180,180,.7)') => {
         this.manualSelectFixed({ index: index, name: name, color: color, backgroundColor: backgroundColor });
     }

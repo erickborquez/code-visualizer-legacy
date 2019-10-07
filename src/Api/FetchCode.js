@@ -39,9 +39,9 @@ const fetchCode = (...names) => {
                     bubblesort([5, 4, 3, 2, 1, 34, 5, 2, 3, 52, 1]);
                     records.end();`
                 })
-            } else{
+            } else {
                 codes.push({
-                    name:"mineSweeper",
+                    name: "mineSweeper",
                     code: `//Buildeas el codigo con CTRL + Enter
                     const records = new AlgorithmCanvas();
                     const bombMatrix = new Array2D([[1, 0, 1], [0, 1, 0], [1, 0, 1]], 'original');
@@ -67,11 +67,11 @@ const fetchCode = (...names) => {
                                     let posX = j + xMov[mov];
                                     let posY = i + yMov[mov];
                                     if (isValidPos(posX, posY, matrix[0].length, matrix.length)) {
-                                        bombMatrix.select([posY, posX], 'rgba(20,100,200,.5');
+                                        bombMatrix.select([posY, posX]);
                                         records.draw();
                                         if (matrix[posY][posX] === 1) {
                                             bombs[i][j]++;
-                                            bombMatrix.select([posY, posX], 'rgba(20,100,230,1');
+                                            bombMatrix.select([posY, posX]);
                                             records.draw();
                                         }
                                     }
