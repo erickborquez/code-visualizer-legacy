@@ -36,8 +36,8 @@ const Controls = props => {
                     )
             }
 
-            <div className="visualizer-control-button">
-                <SkipForwardSvg className="visualizer-control-svg" onClick={() => { setStep(maxSteps); setPaused(true); }} />
+            <div className="visualizer-control-button" onClick={() => { setStep(maxSteps); setPaused(true); }} >
+                <SkipForwardSvg className="visualizer-control-svg" />
 
             </div>
 
