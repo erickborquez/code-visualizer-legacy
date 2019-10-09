@@ -37,16 +37,24 @@
     align-items: center;
 }
 .header-algorithm-name{
+    text-align: center;
     padding: 0 2rem;
     font-weight: 400;
     font-size: 3rem;
     z-index: 1;
     transition: color .2s;
+    border:none;
+    outline: none;
+    background-color: transparent;
+    color:inherit;
 
 }
-.header-algorithm-name:hover + .header-edit{
-    fill:var(--secondary-color);
-}
+
 .header-algorithm-name:hover{
     color:var(--primary-color-light);
 }
+.header-algorithm-name:focus{
+    color:var(--primary-color-light);
+    outline: none;
+}
+

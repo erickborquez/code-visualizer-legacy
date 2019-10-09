@@ -10,12 +10,14 @@ const useStep = (startingStep = 0, lastStep = 0) => {
         const interval = setInterval(() => {
             if (!paused)
                 setStep(Math.min(step + 1, maxSteps));
+            if (step === maxSteps)
+                setPaused(true)
         }, speed)
         return () => clearInterval(interval);
     }
     )
 
-    return [step, setStep,maxSteps, setMaxSteps, speed, setSpeed, paused, setPaused];
+    return [step, setStep, maxSteps, setMaxSteps, speed, setSpeed, paused, setPaused];
 }
 
 export default useStep;
