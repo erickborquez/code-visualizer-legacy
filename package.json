@@ -4,11 +4,13 @@
   "private": true,
   "homepage": "https://erick.borquez.dev/el-algoritmo-del-ritmo/",
   "dependencies": {
+    "firebase": "^7.1.0",
     "react": "^16.9.0",
     "react-ace": "^7.0.4",
     "react-dom": "^16.9.0",
     "react-hooks-worker": "^0.8.0",
     "react-input-range": "^1.3.0",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.1.2",
     "react-select": "^3.0.8"
   },
