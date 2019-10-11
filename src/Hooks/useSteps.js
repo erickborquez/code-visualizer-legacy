@@ -17,7 +17,7 @@ const useStep = (startingStep = 0, lastStep = 0) => {
     }
     )
 
-    return [step, setStep, maxSteps, setMaxSteps, speed, setSpeed, paused, setPaused];
+    return { step, setStep, maxSteps, setMaxSteps, speed, setSpeed, paused, setPaused };
 }
 
 export default useStep;
