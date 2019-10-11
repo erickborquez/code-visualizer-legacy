@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
-//import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Redirect } from "react-router-dom";
+
 
 import Header from './Components/Header'
 import CodeEditor from './Components/CodeEditor';
@@ -8,40 +10,51 @@ import Controls from './Components/Controls';
 import build from './Api/Build';
 
 import useStep from './Hooks/useSteps';
-//import fetchCode from './Api/FetchCode';
 import { colletIdsAndDocs } from './utilities.js'
 
-
 import { firestore } from './firebase';
-
 
 import './Styles/CodeVisualizer.css'
 
 
 
-const CodeVisualizer = ({ match, dbContent }) => {
+const CodeVisualizer = ({ match }) => {
 
-  // eslint-disable-next-line no-unused-vars
-  const [step, setStep, maxSteps, setMaxSteps, speed, setSpeed, paused, setPaused] = useStep(0);
-  const [code, setCode] = useState(dbContent || '');
+  const controlSteps = useStep(0);
+  const [code, setCode] = useState('');
+  const [title, setTitle] = useState('');
   const [records, setRecords] = useState([]);
-  const [title, setTitle] = useState("Untitled");
-
+  const [docReference, setDocReference] = useState(null);
+  const [docSnapshot, setDocSnapshot] = useState(null);
+  const [redirect, setRedirect] = useState(false);
   useEffect(() => {
-    console.log("Effect...");
-    if (match.params.cid !== undefined && dbContent === undefined) {
-      const codeId = match.params.cid;
-      const fetchData = async () => {
-        const docSnapshot = await firestore.collection('code').doc(codeId.toString()).get();
+
+    const getCodeContent = async (codeId) => {
+      const docReference = await firestore.collection('code').doc(codeId.toString());
+      const docSnapshot = await docReference.get();
+      setDocReference(docReference);
+      setDocSnapshot(docSnapshot);
+      if (!docSnapshot.exists) {
+        throw new Error("The document doesn't exists!!!");
+      } else {
         const content = colletIdsAndDocs(docSnapshot);
         setCode(content.code);
         setTitle(content.title);
       }
-      fetchData();
     }
-  }, [dbContent, match.params.cid]);
+
+    const codeId = match.params.cid;
+    if (codeId === undefined) {
+      setTitle("Untitled");
+    } else {
+      getCodeContent(codeId);
+    }
+  }, [])
 
 
+
+
+  //HANDLE HOTKEYS
   useEffect(() => {
     const keyPress = (e) => {
       if (e.ctrlKey && e.key === 'Enter') {
@@ -59,33 +72,44 @@ const CodeVisualizer = ({ match, dbContent }) => {
 
 
 
-  const buildCode = () => build(code, setRecords, setStep, setMaxSteps, setPaused);
+  const buildCode = () => build(code, setRecords, controlSteps.setStep, controlSteps.setMaxSteps, controlSteps.setPaused);
 
   const saveData = async () => {
-    try {
-      const docReference = await firestore.collection('code').add({
+    if (docSnapshot === null) {
+      try {
+        console.log("Creating new fileeee");
+        const docReference = await firestore.collection('code').add({
+          code: code,
+          title: title,
+          user: {
+            displayName: "Eeeerick",
+            uid: "123123123",
+            username: "jejox"
+          }
+        });
+        setDocSnapshot(await docReference.get());
+        setDocReference(docReference);
+        setRedirect(true);
+      } catch (e) {
+        console.error('uhhh error');
+      }
+    } else {
+      docReference.update({
         code: code,
-        title: title,
-        user: {
-          displayName: "Eeeerick",
-          uid: "123123123",
-          username: "jejox"
-        }
-      });
-      let docContent = await docReference.get();
-      console.log(colletIdsAndDocs(docContent))
-    } catch (e) {
-      console.error('uhhh error');
+        title: title
+      })
     }
+
   }
 
   return (
     <div className="App">
+      {redirect ? <Redirect to={`/code/${docReference.id}`} /> : null}
       <Header title={title} setTitle={setTitle} />
       <CodeEditor code={code} setCode={setCode} />
       <div className='visualizer'>
-        <Controls step={step} setStep={setStep} maxSteps={maxSteps} speed={speed} setSpeed={setSpeed} paused={paused} setPaused={setPaused} />
-        <Visualizer records={records} step={step} />
+        <Controls {...controlSteps} />
+        <Visualizer records={records} step={controlSteps.step} />
       </div>
     </div>
   );
