@@ -23,7 +23,7 @@ const Header = ({ title, setTitle }) => {
                             e.key === "Tab")
                             e.target.blur();
                     }}
-                    onChange={e => setTitle(e.target.value.slice(0, 20))} />
+                    onChange={e => setTitle(e.target.value.slice(0, 25))} />
             </div>
         </header>
     )

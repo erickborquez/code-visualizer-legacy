@@ -1,13 +1,29 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import { firestore } from '../firebase';
+
+import { colletIdsAndDocs } from '../utilities.js'
+
 
 const handleRemove = async id => {
     firestore.doc(`code/${id}`).delete();
 }
 
-const Home = ({ match, codes }) => {
+
+
+const Home = ({ match }) => {
+    const [codes, setCodes] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await firestore.collection('code').get();
+            const codes = result.docs.map(colletIdsAndDocs);
+            setCodes(codes);
+        }
+        fetchData();
+    }, [])
+
     return (
         <div>
             <nav>
@@ -22,11 +38,11 @@ const Home = ({ match, codes }) => {
                         <Link to="/users" className="route">See other users</Link>
                     </li>
                     {codes.map(code => {
-                        let path = `${match.url}${code.user.username}/code/${code.id}`;
+                        let path = `${match.url}code/${code.id}`;
                         return (
                             <div key={code.id}>
-                                <Link  className="route" to={path}>{code.title}<br /></Link>
-                                <button  onClick={() => handleRemove(code.id)}>Delete code :(</button>
+                                <Link className="route" to={path}>{code.title}<br /></Link>
+                                <button onClick={() => handleRemove(code.id)}>Delete code :(</button>
                             </div>
                         )
                     })}

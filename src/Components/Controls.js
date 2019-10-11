@@ -13,8 +13,7 @@ import { ReactComponent as Settings } from '../SVGs/settings.svg';
 
 
 
-const Controls = props => {
-    const { step, setStep, maxSteps, speed, setSpeed, paused, setPaused } = props;
+const Controls = ({ step, setStep, maxSteps, speed, setSpeed, paused, setPaused }) => {
     return (
         <div className="visualizer-controls">
 
