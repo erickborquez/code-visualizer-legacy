@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import { firestore } from '../firebase';
 
+import SignInAndOut from './SignInAndOut'
+
 import { colletIdsAndDocs } from '../utilities.js'
 
 
@@ -28,6 +30,9 @@ const Home = ({ match }) => {
         <div>
             <nav>
                 <ul>
+                    <li>
+                        <SignInAndOut />
+                    </li>
                     <li>
                         <Link to="/" className="route">Home</Link>
                     </li>

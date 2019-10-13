@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
+// eslint-disable-next-line no-unused-vars
 import { BrowserRouter as Router, Redirect } from "react-router-dom";
 
 
@@ -15,6 +16,7 @@ import { colletIdsAndDocs } from './utilities.js'
 import { firestore } from './firebase';
 
 import './Styles/CodeVisualizer.css'
+import { auth } from './firebase';
 
 
 
@@ -75,6 +77,8 @@ const CodeVisualizer = ({ match }) => {
   const buildCode = () => build(code, setRecords, controlSteps.setStep, controlSteps.setMaxSteps, controlSteps.setPaused);
 
   const saveData = async () => {
+    const {uid, displayName, email, photoURL} = auth.currentUser || {};
+
     if (docSnapshot === null) {
       try {
         console.log("Creating new fileeee");
@@ -82,9 +86,10 @@ const CodeVisualizer = ({ match }) => {
           code: code,
           title: title,
           user: {
-            displayName: "Eeeerick",
-            uid: "123123123",
-            username: "jejox"
+            uid,
+            displayName,
+            email,
+            photoURL
           }
         });
         setDocSnapshot(await docReference.get());
