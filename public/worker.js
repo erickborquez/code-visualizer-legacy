@@ -25,6 +25,11 @@ class Array1D {
 
     update = (elements = [0]) => this.elements = elements;
 
+    clearSelects = () => {
+        this.fixedStyles = [];
+        this.styles = [];
+    }
+
     manualSelect = (...styles) => {
         styles.forEach(s => {
             //If the style.element is a number, its converted to a function that compares with the number
@@ -51,6 +56,7 @@ class Array1D {
             let exists = false;
             this.fixedStyles = this.fixedStyles.map(fixedStyle => {
                 if (s.name === fixedStyle.name) {
+                    exists = true;
                     return s
                 }
                 return fixedStyle;
@@ -71,30 +77,33 @@ class Array1D {
     }
 
     record = () => {
-        const elements = this.elements.map((e, i) => {
-
+        const styledElements = [];
+        const { elements } = this;
+        for (let i = 0; i < elements.length; i++) {
+            let element = elements[i];
             let style = {}
             this.fixedStyles.forEach(s => {
-                if (s.index(i, e))
-                    style = { ...style, ...s, index: null }
+                if (s.index(Number(i), element))
+                    style = { ...style, ...s, index: i }
             })
+
             this.styles.forEach(s => {
-                if (s.index(i, e))
-                    style = { ...style, ...s, index: null }
+                if (s.index(Number(i), element)) {
+                    style = { ...style, ...s, index: i }
+                }
             })
 
-
-            return {
-                value: e,
+            styledElements.push({
+                value: element,
                 style: style
-            }
-        })
+            })
+        }
 
         this.records.push({
             name: this.name,
             key: this.key,
             type: this.type,
-            elements: elements,
+            elements: styledElements,
         })
         this.styles = [];
     }
@@ -105,7 +114,7 @@ class Array1D {
 }
 
 class Array2D {
-    constructor(elements = [[0]], name = 'Array2D') {
+    constructor(elements = [[null]], name = 'Array2D') {
         this.name = name;
         this.elements = elements;
         this.styles = [];
@@ -116,16 +125,21 @@ class Array2D {
     }
     update = (elements = [[0]]) => this.elements = elements;
 
+    clearSelects = () => {
+        this.fixedStyles = [];
+        this.styles = [];
+    }
+
     manualSelect = (...styles) => {
         styles.forEach(s => {
             //If the style.element is a number, its an array [x,y] its converted to a function that compares [x,y] position]
             if (Array.isArray(s.index)) {
                 if (!isNaN(s.index[0])) {
-                    let [xIndex, yIndex] = s.index;
-                    s.index = ([x, y]) => x === xIndex && y === yIndex;
+                    let [yIndex, xIndex] = s.index;
+                    s.index = ([y, x]) => y === yIndex && x === xIndex;
                 } else {
                     let indexArray = s.index;
-                    s.index = ([x, y]) => indexArray.some(([xIndex, yIndex]) => x === xIndex && y === yIndex);
+                    s.index = ([y, x]) => indexArray.some(([yIndex, xIndex]) => x === xIndex && y === yIndex);
                 }
             }
             this.styles.push(s);
@@ -135,18 +149,19 @@ class Array2D {
         styles.forEach(s => {
             if (Array.isArray(s.index)) {
                 if (!isNaN(s.index[0])) {
-                    let [xIndex, yIndex] = s.index;
-                    s.index = ([x, y]) => x === xIndex && y === yIndex;
+                    let [yIndex, xIndex] = s.index;
+                    s.index = ([y, x]) => y === yIndex && x === xIndex;
                 } else {
                     let indexArray = s.index;
-                    s.index = ([x, y]) => indexArray.some(([xIndex, yIndex]) => x === xIndex && y === yIndex);
+                    s.index = ([y, x]) => indexArray.some(([yIndex, xIndex]) => y === yIndex && x === xIndex);
                 }
             }
 
             let exists = false;
             this.fixedStyles = this.fixedStyles.map(fixedStyle => {
                 if (s.name === fixedStyle.name) {
-                    return s
+                    exists = true;
+                    return s;
                 }
                 return fixedStyle;
             })
@@ -160,43 +175,49 @@ class Array2D {
 
     select = (index, backgroundColor = 'rgba(230,230,230,.2)', color = 'rgba(250,250,250,.7)') => {
         this.manualSelect({ index: index, color: color, backgroundColor: backgroundColor });
-    } 
+    }
     selectFixed = (index, name = 'default', backgroundColor = 'rgba(100,100,100,.2)', color = 'rgba(180,180,180,.7)') => {
         this.manualSelectFixed({ index: index, name: name, color: color, backgroundColor: backgroundColor });
     }
 
     record = () => {
         let maxSize = this.elements.reduce((max, e) => Math.max(max, e.length), 0);
-        const elements = this.elements.map((array1D, x) => {
-            if (array1D.length < maxSize)
+
+        const styledElements2D = []
+
+        const { elements } = this;
+        for (let y = 0; y < elements.length; y++) {
+            let array1D = elements[y];
+            const styledElements1D = []
+            if (array1D.length < maxSize) {
                 array1D = [...array1D, ...Array(maxSize - array1D.length)];
-            return array1D.map((e, y) => {
-                let style = {}
-                this.fixedStyles.forEach(s => {
-                    if (s.index([x, y], e))
-                        style = { ...style, ...s, index: [x, y] }
+            }
+            for (let x = 0; x < array1D.length; x++) {
+                let style = {};
+                let e = array1D[x] || null;
+                this.fixedStyles.forEach((s,i) => {
+                    if (s.index([Number(y), Number(x)], e))
+                        style = { ...style, ...s, index: [y, x] }
                 })
                 this.styles.forEach(s => {
-                    if (s.index([x, y], e))
-                        style = { ...style, ...s, index: [x, y] }
+                    if (s.index([Number(y), Number(x)], e))
+                        style = { ...style, ...s, index: [y, x] }
                 })
-
-                return {
-                    value: e,
-                    style: style
-                }
-            })
-
-        })
-
+                styledElements1D.push({ value: array1D[x], style: style })
+            }
+            styledElements2D.push(styledElements1D);
+        }
         this.records.push({
             name: this.name,
             key: this.key,
             type: this.type,
-            elements: elements,
+            elements: styledElements2D
         })
+
+        
         this.styles = [];
     }
+
 
     get getRecord() {
         return this.records;
