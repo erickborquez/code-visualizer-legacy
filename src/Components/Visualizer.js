@@ -8,7 +8,7 @@ const generateRandomKey = (i) => {
 }
 
 const Visualizer = ({ records, step }) => {
-
+    
     const structures = records.map(s => {
         s = s[step];
         let struct;
