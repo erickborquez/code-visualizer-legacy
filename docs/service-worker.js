@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/el-algoritmo-del-ritmo/precache-manifest.83e69d65e2ac262643322b7de5c5dfd8.js"
+  "/el-algoritmo-del-ritmo/precache-manifest.bde56c76d5f2bff1b1ed24861ab1077e.js"
 );
 
 self.addEventListener('message', (event) => {
