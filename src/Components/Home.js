@@ -1,11 +1,14 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import { firestore } from '../firebase';
 
 import SignInAndOut from './SignInAndOut'
 
 import { colletIdsAndDocs } from '../utilities.js'
+
+import { RouteContext } from '../providers/RouterProvider'
+
 
 
 const handleRemove = async id => {
@@ -14,8 +17,9 @@ const handleRemove = async id => {
 
 
 
-const Home = ({ match }) => {
+const Home = () => {
     const [codes, setCodes] = useState([]);
+    const baseURL = useContext(RouteContext);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -34,16 +38,16 @@ const Home = ({ match }) => {
                         <SignInAndOut />
                     </li>
                     <li>
-                        <Link to="/" className="route">Home</Link>
+                        <Link to={`${baseURL}`} className="route">Home</Link>
                     </li>
                     <li>
-                        <Link to="/code" className="route">Start Coding!</Link>
+                        <Link to={`${baseURL}code`} className="route">Start Coding!</Link>
                     </li>
                     <li>
-                        <Link to="/users" className="route">See other users</Link>
+                        <Link to={`${baseURL}users`} className="route">See other users</Link>
                     </li>
                     {codes.map(code => {
-                        let path = `${match.url}code/${code.id}`;
+                        let path = `${baseURL}code/${code.id}`;
                         return (
                             <div key={code.id}>
                                 <Link className="route" to={path}>{code.title}<br /></Link>

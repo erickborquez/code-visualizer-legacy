@@ -1,16 +1,20 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useContext } from "react";
 import '../Styles/Header.css'
 import { BrowserRouter as Router, Link } from "react-router-dom";
 
-
 import { ReactComponent as Logo } from '../SVGs/logo.svg'
 
+import { RouteContext } from '../providers/RouterProvider'
+
+
 const Header = ({ title, setTitle }) => {
+
+    const baseURL = useContext(RouteContext);
     return (
         <header className="header">
-            <Link to="/" className="header-brand">
+            <Link to={`${baseURL}`} className="header-brand">
                 <Logo className="header-brand-logo" />
                 <h1 className="header-brand-name">Algorithm Visualizer</h1>
             </Link>
@@ -23,7 +27,9 @@ const Header = ({ title, setTitle }) => {
                             e.key === "Tab")
                             e.target.blur();
                     }}
-                    onChange={e => setTitle(e.target.value.slice(0, 25))} />
+                    onChange={e => setTitle(e.target.value.slice(0, 25))}
+                    onBlur={e => e.target.value === '' ? setTitle("Undefined") : null}
+                />
             </div>
         </header>
     )

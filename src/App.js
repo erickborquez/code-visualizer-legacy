@@ -1,34 +1,31 @@
-import React, { useEffect } from 'react';
+import React, { useContext } from 'react';
 import './Styles/App.css'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from './Components/Home'
-import CodeVisualizer from './CodeVisualizer'
-import { auth, createUserProfileDocument } from './firebase';
+import CodeVisualizer from './Components/CodeVisualizer'
+
+import UserProvider from './providers/UserProvider'
+import RouteProvider, { RouteContext } from './providers/RouterProvider';
 
 
 
-const App = () => {
 
+const App = (props) => {
 
-    useEffect(() => {
-        const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-            const user = await createUserProfileDocument(userAuth);
-            console.log(user.email);
-        })
-        return unsubscribeFromAuth;
-
-    }, []);
+    const baseURL = useContext(RouteContext);
 
     return (
-        <Router>
-            <div>
-                <Switch>
-                    <Route exact={true} path="/" render={({ match }) => <Home match={match} />} />
-                    <Route exact={true} path="/code" component={CodeVisualizer} />
-                    <Route path='/code/:cid' render={({ match }) => <CodeVisualizer match={match} />} />
-                </Switch>
-            </div>
-        </Router>
+        <RouteProvider>
+            <UserProvider>
+                <Router>
+                    <Switch>
+                        <Route exact={true} path={`${baseURL}`} render={({ match }) => <Home match={match} />} />
+                        <Route exact={true} path={`${baseURL}code`} component={CodeVisualizer} />
+                        <Route path={`${baseURL}code/:cid`} render={({ match }) => <CodeVisualizer match={match} />} />
+                    </Switch>
+                </Router>
+            </UserProvider>
+        </RouteProvider>
     )
 }
 
