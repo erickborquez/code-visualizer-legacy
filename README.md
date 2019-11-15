@@ -1,68 +1,120 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Algorithm Visualizer
+Write an algorithm and visualize it online.
 
-## Available Scripts
+[demo](https://erick.borquez.dev/el-algoritmo-del-ritmo/)
 
-In the project directory, you can run:
+![Algorithm visualizer preview](assets/Example.png)
 
-### `npm start`
+<br/>
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## What languajes are supported? 
+Algorithm visualizer currently supports only **Javascript**, i have plans to implement C++ and Python in the future.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+<br/>
 
-### `npm test`
+## How can i compile the code?
+In order to compile the code you have to press CTRL + ENTER. <br/>
+I forget to add the button haha, there will be one eventually, i promise 😂
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## How can i visualize the code?
+Well, you have to write you algorithm, then add a few lines of code, some of then are functions and you have to pass your structure, another are only to "select" elements in the structure
 
-### `npm run build`
+First of all you have to create an AlgorithmCanvas that will **watch for changes** on the structures that you want
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```javascript
+  canvas = new AlgorithmCanvas(); 
+```
+<br/>
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To watch for a structure you have to create one
+```javascript
+  ArrayOneDimension =  new Array1D();
+  ArrayOneDimension.update(yourArray);
+  canvas.watch(ArrayOneDimension);
+```
 
-### `npm run eject`
+where Array1D are a class implement in Algorithm Visualizer.
+then you have to update the argument in ArrayOneDimension
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+<br/>
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To **select** an index simply use
+```javascript
+  ArrayOneDimension.select(index);
+  canvas.update();
+```
+Where index not only can be an index of the array, it can be **multiple indexes**, for example
+```javascript
+  ArrayOneDimension.select([2, 4, 7]);
+  canvas.update();
+```
+Here in the canvas te elements 2, 4 and 7 will be selected.
+<br/>
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Another way to select an element is with **functions**, you can pass a function as first argument in ArrayOneDimension
+and it should be evaluated to true or false in order to select an item
+```javascript
+  ArrayOneDimension.select(i => i % 2 == 0);
+  canvas.update();
+```
+Here all the items in the array where the index is even will be selected.
+<br/>
 
-## Learn More
+The **arguments passed to the function** evaluated in the first argument in Structure.select is the index and the value holded by the element itsel
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```javascript
+  ArrayOneDimension.select((i, e) => e > 5);
+  canvas.update();
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Here all the items in the array where the value are greather tan 5 will be selected
 
-### Code Splitting
+<br/>
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## How can i style the selection?
 
-### Analyzing the Bundle Size
+In order to style an element that is beign selected by an structure yo can pass a second and third argument to Structure.select, the value should be in **HEX, RGBA or an standard color name**, and it will change the **background** and **color** respectively.
+```javascript
+  ArrayOneDimension.select(5, 'red', '#BADA55');
+  ArrayOneDimension.select(6, 'rgb(0,0,0)', 'rgba(255,255,255,0.5)');
+  canvas.update();
+```
+<br/>
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+## How do i select an element in a Array with 2 Dimensions (Array2D)?
+To select an element the first parameter of Array2D.select must be an array, the first element will be the position in the Y axis, and the second element will be the X axis.
 
-### Making a Progressive Web App
+```javascript
+  ArrayTwoDimensions = new Array2D([[1,2,3],[4,5,6],[7,8,9]]);
+  ArrayTwoDimension.select([1,1]);
+  canvas.update();
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+<br/>
 
-### Advanced Configuration
+To select multiple elements you have to do something similary to Array1D, but in this case you have to pass an array of arrays, where each element of the first array will be a position to select.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+```javascript
+  ArrayTwoDimension.select([[0,0],[1,1],[2,2]]);
+  canvas.update();
+```
+<br/>
 
-### Deployment
+The argument passed to a function as parameter of Array2D.select will be an array of lenght 2, where the first element will be the position in the Y axis, and the second the position in the X axis, the second argument will be the value holded in that position.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+```javascript
+  ArrayTwoDimension.select(([y,x], value) => y == x);
+  canvas.update();
+```
 
-### `npm run build` fails to minify
+## What structures are supported?
+Currently the application unly supports Arrays with one dimension and arrays with two dimensions.<br/>
+In the future im planning to add something like a **console** where the user can put messages.<br/>
+Eventually **Trees** (Binary tree, firstle) and **graphs** will be added.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+<br/>
+
+## Can i contribute?
+Yeah, every contribution is welcomed :)
