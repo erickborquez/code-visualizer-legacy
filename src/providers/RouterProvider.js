@@ -3,7 +3,7 @@ import React, { useState, createContext } from 'react';
 
 export const RouteContext = createContext('/');
 
-const RouterProvider = ({ children }) => {
+const RouteProvider = ({ children }) => {
 
     const [baseURL, setURL] = useState('/')
     let repoURL = '/el-algoritmo-del-ritmo/'
@@ -17,4 +17,4 @@ const RouterProvider = ({ children }) => {
         </RouteContext.Provider>
     )
 }
-export default RouterProvider
+export default RouteProvider;

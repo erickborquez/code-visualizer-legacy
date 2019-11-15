@@ -80,7 +80,7 @@ class Array1D {
         const styledElements = [];
         const { elements } = this;
         for (let i = 0; i < elements.length; i++) {
-            let element = elements[i];
+            let element = elements[i] || ' ';
             let style = {}
             this.fixedStyles.forEach(s => {
                 if (s.index(Number(i), element))
@@ -194,8 +194,8 @@ class Array2D {
             }
             for (let x = 0; x < array1D.length; x++) {
                 let style = {};
-                let e = array1D[x] || null;
-                this.fixedStyles.forEach((s,i) => {
+                let e = array1D[x] || ' ';
+                this.fixedStyles.forEach((s, i) => {
                     if (s.index([Number(y), Number(x)], e))
                         style = { ...style, ...s, index: [y, x] }
                 })
@@ -214,7 +214,7 @@ class Array2D {
             elements: styledElements2D
         })
 
-        
+
         this.styles = [];
     }
 
