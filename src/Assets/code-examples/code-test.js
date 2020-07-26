@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 
-/////// BUBBLE SORT 
+/////// BUBBLE SORT
 /*
 const records = new AlgorithmCanvas();
 const arrayStructure = new Array1D([], 'bubblesort');
@@ -32,48 +32,53 @@ records.end();
 
 // ARRAY2D TESTS
 
-
 //MINESWEEPER{
 const records = new AlgorithmCanvas();
-const bombMatrix = new Array2D([[1, 0, 1], [0, 1, 0], [1, 0, 1]], 'original');
-const mines = new Array2D([[]], 'modified');
+const bombMatrix = new Array2D(
+  [
+    [1, 0, 1],
+    [0, 1, 0],
+    [1, 0, 1],
+  ],
+  "original"
+);
+const mines = new Array2D([[]], "modified");
 records.watch(bombMatrix, mines);
 
 const isValidPos = (x, y, limX, limY) => {
-    return x >= 0 && y >= 0 && x < limX && y < limY;
-}
+  return x >= 0 && y >= 0 && x < limX && y < limY;
+};
 
 const xMov = [0, 1, 1, 1, 0, -1, -1, -1];
 const yMov = [-1, -1, 0, 1, 1, 1, 0, -1];
 
 const minesweeper = (matrix) => {
-    let bombs = matrix.map(a => a.map(e => 0));
-    mines.update(bombs);
-    for (let i = 0; i < matrix.length; i++) {
-        for (let j = 0; j < matrix[0].length; j++) {
-            mines.selectFixed([i, j]);
-            bombMatrix.selectFixed([i, j]);
+  let bombs = matrix.map((a) => a.map((e) => 0));
+  mines.update(bombs);
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[0].length; j++) {
+      mines.selectFixed([i, j]);
+      bombMatrix.selectFixed([i, j]);
+      records.draw();
+      for (let mov = 0; mov < 9; mov++) {
+        let posX = j + xMov[mov];
+        let posY = i + yMov[mov];
+        if (isValidPos(posX, posY, matrix[0].length, matrix.length)) {
+          bombMatrix.select([posY, posX], "rgba(20,100,200,.5");
+          records.draw();
+          if (matrix[posY][posX] === 1) {
+            bombs[i][j]++;
+            bombMatrix.select([posY, posX], "rgba(20,100,230,1");
             records.draw();
-            for (let mov = 0; mov < 9; mov++) {
-                let posX = j + xMov[mov];
-                let posY = i + yMov[mov];
-                if (isValidPos(posX, posY, matrix[0].length, matrix.length)) {
-                    bombMatrix.select([posY, posX], 'rgba(20,100,200,.5');
-                    records.draw();
-                    if (matrix[posY][posX] === 1) {
-                        bombs[i][j]++;
-                        bombMatrix.select([posY, posX], 'rgba(20,100,230,1');
-                        records.draw();
-                    }
-                }
-            }
+          }
         }
+      }
     }
-    mines.update(bombs);
+  }
+  mines.update(bombs);
 
-    records.draw();
-}
-
+  records.draw();
+};
 
 minesweeper(bombMatrix.elements);
 records.end();

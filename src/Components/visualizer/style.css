@@ -19,9 +19,9 @@
 
 .visualizer-structures {
   background-color: #333430;
-  display:flex;
+  display: flex;
   flex-direction: column;
-  border-radius:3px;
+  border-radius: 3px;
   overflow: hidden;
 }
 .visualizer-control-button {
@@ -30,7 +30,7 @@
   position: relative;
   background-color: var(--secondary-color-dark);
   transition: background-color 0.3s;
-  margin-right: .8rem;
+  margin-right: 0.8rem;
 }
 .visualizer-control-button:hover {
   transform: translateY(-0.5px);
@@ -68,7 +68,7 @@
   transition: fill 0.2s;
 }
 .visualizer-control-range {
-    margin-right: 1rem;
+  margin-right: 1rem;
   display: flex;
   align-items: baseline;
   width: 15rem;
@@ -86,13 +86,13 @@
 .input-range__label-container {
   display: none;
 }
-.input-range__track { 
-    background-color: var(--secondary-color) !important;
+.input-range__track {
+  background-color: var(--secondary-color) !important;
 }
-.input-range__track--active{
-    background-color: transparent !important;
+.input-range__track--active {
+  background-color: transparent !important;
 }
-.input-range__slider{
-    background-color: var(--primary-color) !important;
-    border: none !important;
+.input-range__slider {
+  background-color: var(--primary-color) !important;
+  border: none !important;
 }
