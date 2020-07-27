@@ -1,9 +1,11 @@
 .structure {
-  padding: 2rem 4rem 0 4rem;
+  padding: 2rem 4rem 2rem 4rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  overflow: hidden;
+  overflow-x: scroll;
 }
 .structure:not(:last-child):after {
   content: "";
@@ -12,6 +14,15 @@
   height: 2px;
   border-radius: 1px;
   background-color: var(--secondary-color);
+}
+.structure::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.structure::-webkit-scrollbar-thumb {
+  background: rgba(200, 200, 200, 0.5);
+  border-radius: 10 0px;
 }
 
 .structure__name {

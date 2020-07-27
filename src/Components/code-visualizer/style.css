@@ -1,12 +1,41 @@
-.App {
-  height: 100vh;
+.code-visualizer {
+  height: 100%;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 5rem 1fr;
-  grid-template-areas:
-    "header header"
-    "editor visualizer";
-  gap: 1rem 2rem;
-  padding: 0 1rem 1rem 1rem;
+  grid-template-columns: 1fr min-content 1fr;
+  grid-template-areas: "editor edit-width visualizer";
+  align-items: center;
+  padding: 1rem 1rem 1rem 1rem;
+  transition: all 0.2s;
+}
+.code-visualizer__edit-width {
+  grid-area: edit-width;
+  height: 30rem;
+  width: 10px;
+  position: relative;
+}
+.code-visualizer__edit-width::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 4px;
+  height: 10rem;
+  border-radius: 3px;
+  background-color: var(--secondary-color-dark);
+  transition: all 0.2s;
+}
+.code-visualizer__edit-width:hover {
+  cursor: ew-resize !important;
+}
+
+.code-visualizer__edit-width:hover.code-visualizer__edit-width::after {
+  background-color: var(--secondary-color);
+}
+
+.code-visualizer__edit-width:active,
+.code-visualizer__edit-width:active.code-visualizer__edit-width::after {
+  background-color: transparent !important;
+  cursor: ew-resize !important;
 }

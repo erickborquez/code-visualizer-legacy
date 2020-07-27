@@ -13,9 +13,9 @@ import "brace/mode/javascript";
 import "brace/theme/monokai";
 import "brace/mode/c_cpp";
 
-const CodeEditor = (props) => {
+const CodeEditor = ({ code, setCode, showControls = true, ...props }) => {
   const [mode, setMode] = useState("javascript");
-  const [fontSize, setFontSize] = useState(16);
+  const [fontSize, setFontSize] = useState(14);
   const [theme, setTheme] = useState("monokai");
 
   const options = {
@@ -33,6 +33,8 @@ const CodeEditor = (props) => {
     ],
     fontSize: [
       { value: "10", label: "10" },
+      { value: "12", label: "12" },
+      { value: "14", label: "14" },
       { value: "16", label: "16" },
       { value: "20", label: "20" },
       { value: "30", label: "30" },
@@ -48,62 +50,64 @@ const CodeEditor = (props) => {
     import(`brace/theme/${theme}`).then(() => setTheme(theme));
   };
   return (
-    <div className="code">
-      <div className="option">
-        <div className="option-controls">
-          <Select
-            onChange={handleModeChange}
-            isSearchable={false}
-            blurInputOnSelect={true}
-            options={options.code}
-            className="option-select option-select__code"
-            classNamePrefix="option-select"
-            defaultValue={{ value: "javascript", label: "Javascript" }}
-            components={{
-              DropdownIndicator: () => null,
-              IndicatorSeparator: () => null,
-            }}
-          />
-          <Select
-            onChange={handleThemeChange}
-            isSearchable={false}
-            blurInputOnSelect={true}
-            options={options.theme}
-            className="option-select option-select__theme"
-            classNamePrefix="option-select"
-            defaultValue={{ value: "monokai", label: "Monokai" }}
-            components={{
-              DropdownIndicator: () => null,
-              IndicatorSeparator: () => null,
-            }}
-          />
-          <Select
-            onChange={(e) => setFontSize(e.value)}
-            isSearchable={false}
-            blurInputOnSelect={true}
-            options={options.fontSize}
-            className="option-select option-select__font-size"
-            classNamePrefix="option-select"
-            defaultValue={{ value: "14", label: "14" }}
-            components={{
-              DropdownIndicator: () => null,
-              IndicatorSeparator: () => null,
-            }}
-          />
+    <div className="editor">
+      {showControls && (
+        <div className="option">
+          <div className="option-controls">
+            <Select
+              onChange={handleModeChange}
+              isSearchable={false}
+              blurInputOnSelect={true}
+              options={options.code}
+              className="option-select option-select__code"
+              classNamePrefix="option-select"
+              defaultValue={{ value: "javascript", label: "Javascript" }}
+              components={{
+                DropdownIndicator: () => null,
+                IndicatorSeparator: () => null,
+              }}
+            />
+            <Select
+              onChange={handleThemeChange}
+              isSearchable={false}
+              blurInputOnSelect={true}
+              options={options.theme}
+              className="option-select option-select__theme"
+              classNamePrefix="option-select"
+              defaultValue={{ value: "monokai", label: "Monokai" }}
+              components={{
+                DropdownIndicator: () => null,
+                IndicatorSeparator: () => null,
+              }}
+            />
+            <Select
+              onChange={(e) => setFontSize(e.value)}
+              isSearchable={false}
+              blurInputOnSelect={true}
+              options={options.fontSize}
+              className="option-select option-select__font-size"
+              classNamePrefix="option-select"
+              defaultValue={{ value: "14", label: "14" }}
+              components={{
+                DropdownIndicator: () => null,
+                IndicatorSeparator: () => null,
+              }}
+            />
+          </div>
+          <div className="option-name">
+            <h3 className="option-name__local-name">Algorithm Visualizer</h3>
+          </div>
         </div>
-        <div className="option-name">
-          <h3 className="option-name__local-name">Local Name</h3>
-          <div className="button-grey option-name__add"></div>
-        </div>
-      </div>
+      )}
+
       <AceEditor
-        value={props.code}
+        value={code}
         mode={mode.toLowerCase()}
         fontSize={`${fontSize}px`}
         theme={theme.toLocaleLowerCase()}
         showPrintMargin={false}
         scrollMargin={[10, 0, 0, 0]}
-        onChange={(code) => props.setCode(code)}
+        onChange={(code) => setCode(code)}
         name="UNIQUE_ID_OF_DIV"
         editorProps={{ $blockScrolling: Infinity }}
         enableBasicAutocompletion={true}

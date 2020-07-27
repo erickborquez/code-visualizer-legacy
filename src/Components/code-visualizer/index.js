@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from "react";
 
-import Header from "../header";
 import CodeEditor from "../code-editor";
 import Visualizer from "../visualizer";
-import Controls from "../controls";
 import build from "../../Api/Build";
 
 import useStep from "../../Hooks/useSteps";
 
 import "./style.css";
 
-const CodeVisualizer = ({ match }) => {
+let totalScale = 1000;
+
+const CodeVisualizer = ({ code: initialCode = "" }) => {
+  const [code, setCode] = useState(initialCode);
+  const [width, setWidth] = useState([totalScale / 2, totalScale / 2]);
   const controlSteps = useStep(0);
-  const [code, setCode] = useState("");
-  const [title, setTitle] = useState("");
   const [records, setRecords] = useState([]);
+  const [canUpdateWidth, setCanUpdateWidth] = useState(true);
+  const [ignoreDrag, setIgnoreDrag] = useState(true);
 
   //HANDLE HOTKEYS
   useEffect(() => {
@@ -38,14 +40,46 @@ const CodeVisualizer = ({ match }) => {
       controlSteps.setPaused
     );
 
+  const handleDrag = (e) => {
+    if (!canUpdateWidth || e.clientX === 0) return;
+    if (ignoreDrag) {
+      setIgnoreDrag(false);
+      return;
+    }
+    setCanUpdateWidth(false);
+    const totalWidth = window.innerWidth;
+    const ratio = e.clientX / totalWidth;
+    const left = Math.floor(totalScale * ratio);
+    setWidth([left, totalScale - left]);
+
+    setTimeout(() => setCanUpdateWidth(true), 5);
+  };
+
+  const handleDragEnd = () => {
+    setIgnoreDrag(true);
+    if (width[0] < 100) setWidth([0, totalScale]);
+    if (totalScale - width[0] < 100) setWidth([totalScale, 0]);
+  };
+
+  const handleDoubleClick = () => {
+    setWidth([totalScale / 2, totalScale / 2]);
+  };
+
   return (
-    <div className="App">
-      <Header title={title} setTitle={setTitle} />
+    <div
+      className="code-visualizer"
+      style={{ gridTemplateColumns: `${width[0]}fr min-content ${width[1]}fr` }}
+    >
       <CodeEditor code={code} setCode={setCode} />
-      <div className="visualizer">
-        <Visualizer records={records} {...controlSteps} />
-        {/* <Visualizer records={records} step={controlSteps.step} /> */}
-      </div>
+      <div
+        className="code-visualizer__edit-width"
+        onDrag={handleDrag}
+        onDragEnd={handleDragEnd}
+        draggable
+        onDoubleClick={handleDoubleClick}
+      />
+      <Visualizer records={records} {...controlSteps} loop={false} />
+      {/* <Visualizer records={records} step={controlSteps.step} /> */}
     </div>
   );
 };

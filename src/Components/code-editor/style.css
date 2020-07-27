@@ -1,11 +1,15 @@
-.code {
+.editor {
+  height: 100%;
   border-radius: 5px;
   overflow: hidden;
   display: grid;
-  grid-template-rows: 6rem 1fr;
+  grid-area: editor;
+  grid-template-rows: min-content 1fr;
+  grid-template-areas: "controls" "code-editor";
 }
 .code-editor {
   z-index: 0;
+  grid-area: code-editor;
 }
 
 .ace_scrollbar::-webkit-scrollbar {
@@ -14,11 +18,12 @@
   height: 5px;
 }
 .ace_scrollbar::-webkit-scrollbar-thumb {
-  background: red;
+  background: rgba(200, 200, 200, 0.5);
   border-radius: 10 0px;
 }
 
 .option {
+  height: 5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;

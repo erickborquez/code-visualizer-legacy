@@ -38,10 +38,10 @@ const Visualizer = ({ records, showControls = true, step, ...props }) => {
   });
 
   return (
-    <>
+    <div className="visualizer">
       {showControls && <Controls step={step} {...props} />}
       <div className="visualizer-structures">{structures}</div>
-    </>
+    </div>
   );
 };
 

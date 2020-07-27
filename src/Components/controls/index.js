@@ -8,7 +8,6 @@ import { ReactComponent as PauseSvg } from "../../Assets/icons/pause.svg";
 import { ReactComponent as PlaySvg } from "../../Assets/icons/play.svg";
 import { ReactComponent as SkipBackSvg } from "../../Assets/icons/skip-back.svg";
 import { ReactComponent as SkipForwardSvg } from "../../Assets/icons/skip-forward.svg";
-import { ReactComponent as Settings } from "../../Assets/icons/settings.svg";
 
 const Controls = ({
   step,
@@ -94,9 +93,9 @@ const Controls = ({
           onChange={(value) => setSpeed(-value)}
         />
       </div>
-      <div className="visualizer-control-option">
+      {/* <div className="visualizer-control-option">
         <Settings className="visualizer-control-svg" />
-      </div>
+      </div> */}
     </div>
   );
 };
