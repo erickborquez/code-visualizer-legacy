@@ -1,23 +1,38 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useReducer } from "react";
 
-const useStep = (startingStep = 0, lastStep = 0) => {
-    const [step, setStep] = useState(startingStep);
-    const [speed, setSpeed] = useState(300);
-    const [paused, setPaused] = useState(true);
-    const [maxSteps, setMaxSteps] = useState(lastStep);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            if (!paused)
-                setStep(Math.min(step + 1, maxSteps));
-            if (step === maxSteps)
-                setPaused(true)
-        }, speed)
-        return () => clearInterval(interval);
+const useStep = (startingStep = 0, lastStep = 0, loop = false) => {
+  const [state, dispatch] = useReducer(
+    (state, newState) => {
+      return { ...state, ...newState };
+    },
+    {
+      step: startingStep,
+      speed: 300,
+      paused: true,
+      maxSteps: lastStep,
+      loop: loop,
     }
-    )
+  );
 
-    return { step, setStep, maxSteps, setMaxSteps, speed, setSpeed, paused, setPaused };
-}
+  useEffect(() => {
+    let destroyer = () => null;
+    let { step, paused, speed, maxSteps } = state;
+    if (!paused) {
+      const nextStep = Math.min(step + 1, maxSteps - 1);
+      const updateStep = setTimeout(
+        () =>
+          dispatch({
+            step: nextStep,
+            paused: nextStep === maxSteps - 1 && !loop,
+          }),
+        speed
+      );
+      destroyer = () => clearTimeout(updateStep);
+    }
+    return destroyer;
+  }, [state, lastStep, loop]);
+
+  return [state, dispatch];
+};
 
 export default useStep;

@@ -25,3 +25,15 @@
 .button-grey:hover {
   background-color: var(--secondary-color-hover);
 }
+
+.boxShadow,
+.boxShadow--padding {
+  background-color: rgb(39, 40, 34);
+  border-radius: 3px;
+  box-shadow: 0px 0px 5px rgb(114, 114, 114);
+  margin: 3rem auto;
+}
+
+.boxShadow--padding {
+  padding: 2rem 0;
+}

@@ -11,21 +11,19 @@ import { ReactComponent as SkipForwardSvg } from "../../Assets/icons/skip-forwar
 
 const Controls = ({
   step,
-  setStep,
+  paused,
+  loop,
   maxSteps,
   speed,
-  setSpeed,
-  paused,
-  setPaused,
+  dispatchSteps,
+  ...props
 }) => {
+  // console.log(step, paused, loop, maxSteps, speed, dispatchSteps);
   return (
     <div className="visualizer-controls">
       <div
         className="visualizer-control-button"
-        onClick={() => {
-          setStep(0);
-          setPaused(true);
-        }}
+        onClick={() => dispatchSteps({ step: 0, paused: true })}
       >
         <SkipBackSvg className="visualizer-control-svg" />
       </div>
@@ -34,7 +32,7 @@ const Controls = ({
         <div
           className="visualizer-control-button"
           onClick={() => {
-            if (step !== maxSteps) setPaused(false);
+            if (step !== maxSteps) dispatchSteps({ paused: false });
           }}
         >
           <PlaySvg className="visualizer-control-svg" />
@@ -42,7 +40,7 @@ const Controls = ({
       ) : (
         <div
           className="visualizer-control-button"
-          onClick={() => setPaused(true)}
+          onClick={() => dispatchSteps({ paused: true })}
         >
           <PauseSvg className="visualizer-control-svg" />
         </div>
@@ -50,34 +48,32 @@ const Controls = ({
 
       <div
         className="visualizer-control-button"
-        onClick={() => {
-          setStep(maxSteps);
-          setPaused(true);
-        }}
+        onClick={() => dispatchSteps({ step: maxSteps - 1, paused: true })}
       >
         <SkipForwardSvg className="visualizer-control-svg" />
       </div>
 
       <div
         className="visualizer-control-option"
-        onClick={() => {
-          setStep(Math.max(step - 1, 0));
-          setPaused(true);
-        }}
+        onClick={() =>
+          dispatchSteps({ step: Math.max(step - 1, 0), paused: true })
+        }
       >
         <BackSvg className="visualizer-control-svg" />
       </div>
       <div>
         <span className="visualizer-control-label">
-          {("00000" + step).slice(-maxSteps.toString().length)}/{maxSteps}
+          {("00000" + Math.min(step + 1, maxSteps)).slice(
+            -maxSteps.toString().length
+          )}
+          /{maxSteps}
         </span>
       </div>
       <div
         className="visualizer-control-option"
-        onClick={() => {
-          setStep(Math.min(step + 1, maxSteps));
-          setPaused(true);
-        }}
+        onClick={() =>
+          dispatchSteps({ step: Math.min(step + 1, maxSteps), paused: true })
+        }
       >
         <ForwardSvg className="visualizer-control-svg" />
       </div>
@@ -90,7 +86,7 @@ const Controls = ({
           maxValue={-20}
           minValue={-500}
           value={-speed}
-          onChange={(value) => setSpeed(-value)}
+          onChange={(value) => dispatchSteps({ speed: -value })}
         />
       </div>
       {/* <div className="visualizer-control-option">

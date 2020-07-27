@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
+import { Tree } from "react-data-structures";
+import { firstExample } from "../../Assets/code-examples/home-codes";
 
 import CodeVisualizer from "../../Components/code-visualizer";
 // import Header from "../../Components/header";
 
 import "./style.css";
+import "../../Shared/fonts.css";
+import "../../Shared/utilities.css";
+import CodeSnippet from "../../Components/code-snippet";
 
 const data = {
   code: `const records = new AlgorithmCanvas();
@@ -36,13 +42,54 @@ const data = {
   description: "",
 };
 
+let count = 0;
+
 const Home = () => {
+  const [tree, setTree] = useState({ root: { value: "0", children: [] } });
+  useEffect(() => {
+    if (count > 10) return;
+    setTimeout(() => {
+      const treeCopy = JSON.parse(JSON.stringify(tree));
+      const parent = Object.keys(treeCopy)[
+        Math.floor(Math.random() * Object.keys(treeCopy).length)
+      ];
+      treeCopy[count] = { value: count, children: [] };
+      treeCopy[parent].children.push(count);
+      count++;
+      setTree(treeCopy);
+    }, 1);
+  }, [tree]);
   return (
     <>
-      {/* <Header /> */}
       <main className="home">
-        <CodeVisualizer {...data} />
-        <div className="fill" />
+        <CodeVisualizer {...data} className="home__code-visualizer" />
+
+        <section className="home__section">
+          <h2>Introduction</h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero iste
+            iure ratione aperiam reprehenderit dolore ipsa architecto enim
+            facilis quam corrupti odio rerum repudiandae voluptates voluptate,
+            mollitia velit, laudantium debitis? Lorem ipsum dolor sit amet
+            consectetur adipisicing elit. Eveniet, provident magnam voluptatibus
+            delectus libero accusantium odit minus, pariatur doloremque
+            perferendis reiciendis debitis maiores ex ipsa autem ea, atque
+            similique. Eveniet?
+          </p>
+          <CodeSnippet>{firstExample}</CodeSnippet>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero iste
+            iure ratione aperiam reprehenderit dolore ipsa architecto enim
+            facilis quam corrupti odio rerum repudiandae voluptates voluptate,
+            mollitia velit, laudantium debitis? Lorem ipsum dolor sit amet
+            consectetur adipisicing elit.
+          </p>
+          <CodeVisualizer
+            code={firstExample}
+            showEditor={false}
+            className="home__section__visualizer boxShadow"
+          />
+        </section>
       </main>
     </>
   );

@@ -7,6 +7,10 @@
   grid-template-rows: min-content 1fr;
   grid-template-areas: "controls" "code-editor";
 }
+.ace_editor {
+  font-family: Hack, monospace !important;
+  letter-spacing: 0.1px;
+}
 .code-editor {
   z-index: 0;
   grid-area: code-editor;

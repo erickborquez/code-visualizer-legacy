@@ -7,6 +7,8 @@
   align-items: center;
   padding: 1rem 1rem 1rem 1rem;
   transition: all 0.2s;
+  color: var(--primary-color);
+  background-color: #2e2e2a;
 }
 .code-visualizer__edit-width {
   grid-area: edit-width;

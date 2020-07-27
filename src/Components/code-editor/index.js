@@ -11,7 +11,6 @@ import "brace/snippets/javascript";
 import "brace/ext/language_tools";
 import "brace/mode/javascript";
 import "brace/theme/monokai";
-import "brace/mode/c_cpp";
 
 const CodeEditor = ({ code, setCode, showControls = true, ...props }) => {
   const [mode, setMode] = useState("javascript");
@@ -19,11 +18,7 @@ const CodeEditor = ({ code, setCode, showControls = true, ...props }) => {
   const [theme, setTheme] = useState("monokai");
 
   const options = {
-    code: [
-      { value: "javascript", label: "Javascript" },
-      { value: "python", label: "Python" },
-      { value: "c_cpp", label: "C++" },
-    ],
+    code: [{ value: "javascript", label: "Javascript" }],
     theme: [
       { value: "monokai", label: "Monokai" },
       { value: "github", label: "Github" },
