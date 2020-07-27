@@ -51,6 +51,7 @@ const CodeVisualizer = ({
 
   useEffect(() => {
     if (buildOnLoad) buildCode();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleDrag = (e) => {

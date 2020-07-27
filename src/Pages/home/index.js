@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { Tree } from "react-data-structures";
+// import { Tree } from "react-data-structures";
 import { firstExample } from "../../Assets/code-examples/home-codes";
 
 import CodeVisualizer from "../../Components/code-visualizer";
