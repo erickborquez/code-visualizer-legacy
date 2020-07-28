@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 import CodeEditor from "../code-editor";
 import Visualizer from "../visualizer";
@@ -25,34 +25,25 @@ const CodeVisualizer = ({
   const [canUpdateWidth, setCanUpdateWidth] = useState(true);
   const [ignoreDrag, setIgnoreDrag] = useState(true);
 
-  //HANDLE HOTKEYS
-  useEffect(() => {
-    const keyPress = (e) => {
-      if (e.ctrlKey && e.key === "Enter") {
-        buildCode();
+  const buildCode = useCallback(
+    async (newCode) => {
+      try {
+        const records = await build(newCode);
+        setRecords(records);
+        console.log(records);
+        dispatchSteps({ step: 0, maxSteps: records[0].length });
+      } catch (e) {
+        console.log("Error", e);
       }
-    };
-    window.addEventListener("keydown", keyPress);
-    return () => {
-      window.removeEventListener("keydown", keyPress);
-    };
-  });
+    },
+    [dispatchSteps, setRecords]
+  );
 
-  const buildCode = async () => {
-    try {
-      const records = await build(code);
-      setRecords(records);
-      dispatchSteps({ step: 0, maxSteps: records[0].length });
-    } catch (e) {
-      console.log("Error", e);
-    }
-  };
   /// Build on first load
 
   useEffect(() => {
-    if (buildOnLoad) buildCode();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (buildOnLoad) buildCode(initialCode);
+  }, [buildOnLoad, initialCode, buildCode]);
 
   const handleDrag = (e) => {
     if (!canUpdateWidth || e.clientX === 0) return;
@@ -101,6 +92,7 @@ const CodeVisualizer = ({
         {...stepsState}
         dispatchSteps={dispatchSteps}
         loop={false}
+        buildCode={() => buildCode(code)}
       />
     </div>
   );

@@ -37,9 +37,6 @@ const data = {
   
   bubblesort([5, 4, 3, 2, 1, 34, 5, 2, 3, 52, 1]);
   records.end();`,
-  build: true,
-  link: "",
-  description: "",
 };
 
 let count = 0;
@@ -63,7 +60,6 @@ const Home = () => {
     <>
       <main className="home">
         <CodeVisualizer {...data} className="home__code-visualizer" />
-
         <section className="home__section">
           <h2>Introduction</h2>
           <p>

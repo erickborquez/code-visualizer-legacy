@@ -1,0 +1,72 @@
+.visualizer-control-button {
+  padding: 1.2rem 2.3rem;
+  border-radius: 2px;
+  position: relative;
+  background-color: var(--secondary-color-dark);
+  transition: background-color 0.3s;
+  margin-right: 0.8rem;
+}
+.visualizer-control-button:hover {
+  transform: translateY(-0.5px);
+  box-shadow: 1.5px 1.5px 2px rgba(20, 20, 20, 0.5);
+  cursor: pointer;
+  background-color: var(--secondary-color-dark-hover);
+  color: var(--primary-color-light);
+}
+.visualizer-control-button:active {
+  transform: translateY(0);
+  box-shadow: 0.5px 0.5px 2px rgba(20, 20, 20, 0.5);
+}
+
+.visualizer-control-option {
+  position: relative;
+  padding: 1.2rem 1.2rem;
+}
+
+.visualizer-control-option:hover .visualizer-control-svg {
+  cursor: pointer;
+  fill: var(--primary-color);
+  transform: translate(-50%, calc(-50% - 0.25px));
+}
+.visualizer-control-option:active .visualizer-control-svg {
+  transform: translate(-50%, calc(-50% + 0.25px));
+}
+
+.visualizer-control-svg {
+  fill: var(--secondary-color);
+  width: 2.5rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: fill 0.2s;
+}
+.visualizer-control-range {
+  margin-right: 1rem;
+  display: flex;
+  align-items: baseline;
+  width: 15rem;
+}
+.visualizer-control-label {
+  color: var(--secondary-color);
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+.visualizer-control-range-label {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+}
+
+.input-range__label-container {
+  display: none;
+}
+.input-range__track {
+  background-color: var(--secondary-color) !important;
+}
+.input-range__track--active {
+  background-color: transparent !important;
+}
+.input-range__slider {
+  background-color: var(--primary-color) !important;
+  border: none !important;
+}

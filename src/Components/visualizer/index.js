@@ -8,7 +8,13 @@ const generateRandomKey = (i) => {
   return `key-${i}=${new Date().getTime()}`;
 };
 
-const Visualizer = ({ records, showControls = true, step, ...props }) => {
+const Visualizer = ({
+  records,
+  showControls = true,
+  step,
+  buildCode = () => null,
+  ...props
+}) => {
   const structures = records.map((s) => {
     s = s[step];
     let struct;
@@ -39,7 +45,9 @@ const Visualizer = ({ records, showControls = true, step, ...props }) => {
 
   return (
     <div className="visualizer">
-      {showControls && <Controls step={step} {...props} />}
+      {showControls && (
+        <Controls step={step} buildCode={buildCode} {...props} />
+      )}
       <div className="visualizer-structures">{structures}</div>
     </div>
   );

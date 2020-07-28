@@ -2,12 +2,15 @@ import React from "react";
 import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
 
+import { ReactComponent as BuildIcon } from "../../Assets/icons/build.svg";
 import { ReactComponent as BackSvg } from "../../Assets/icons/back.svg";
 import { ReactComponent as ForwardSvg } from "../../Assets/icons/forward.svg";
 import { ReactComponent as PauseSvg } from "../../Assets/icons/pause.svg";
 import { ReactComponent as PlaySvg } from "../../Assets/icons/play.svg";
 import { ReactComponent as SkipBackSvg } from "../../Assets/icons/skip-back.svg";
 import { ReactComponent as SkipForwardSvg } from "../../Assets/icons/skip-forward.svg";
+
+import "./style.css";
 
 const Controls = ({
   step,
@@ -16,11 +19,26 @@ const Controls = ({
   maxSteps,
   speed,
   dispatchSteps,
+  buildCode = () => null,
+  building = false,
   ...props
 }) => {
   // console.log(step, paused, loop, maxSteps, speed, dispatchSteps);
   return (
     <div className="visualizer-controls">
+      <div
+        className="visualizer-control-option"
+        style={{ marginRight: "1rem" }}
+        onClick={buildCode}
+      >
+        <BuildIcon className="visualizer-control-svg" />
+      </div>
+      <div
+        className="visualizer-control-button"
+        onClick={() => dispatchSteps({ step: 0, paused: true })}
+      >
+        <SkipBackSvg className="visualizer-control-svg" />
+      </div>
       <div
         className="visualizer-control-button"
         onClick={() => dispatchSteps({ step: 0, paused: true })}
