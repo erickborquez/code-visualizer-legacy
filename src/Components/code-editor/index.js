@@ -90,7 +90,7 @@ const CodeEditor = ({ code, setCode, showControls = true, ...props }) => {
             />
           </div>
           <div className="option-name">
-            <h3 className="option-name__local-name">Algorithm Visualizer</h3>
+            <h3 className="option-name__local-name">Code visualizer</h3>
           </div>
         </div>
       )}
