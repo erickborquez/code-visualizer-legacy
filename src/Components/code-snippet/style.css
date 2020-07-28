@@ -7,6 +7,6 @@
 }
 
 .code-snippet {
-  font-size: 1.8rem;
-  line-height: 2.4rem;
+  font-size: 1.8rem !important;
+  line-height: 2.2rem !important;
 }

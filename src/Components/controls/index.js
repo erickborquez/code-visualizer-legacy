@@ -39,12 +39,6 @@ const Controls = ({
       >
         <SkipBackSvg className="visualizer-control-svg" />
       </div>
-      <div
-        className="visualizer-control-button"
-        onClick={() => dispatchSteps({ step: 0, paused: true })}
-      >
-        <SkipBackSvg className="visualizer-control-svg" />
-      </div>
 
       {paused ? (
         <div

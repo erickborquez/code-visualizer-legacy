@@ -15,6 +15,7 @@ const CodeVisualizer = ({
   className,
   buildOnLoad = true,
   showEditor = true,
+  style = {},
 }) => {
   const [code, setCode] = useState(initialCode);
   const [width, setWidth] = useState(
@@ -73,7 +74,10 @@ const CodeVisualizer = ({
   return (
     <div
       className={`code-visualizer ${className}`}
-      style={{ gridTemplateColumns: `${width[0]}fr min-content ${width[1]}fr` }}
+      style={{
+        ...style,
+        gridTemplateColumns: `${width[0]}fr min-content ${width[1]}fr`,
+      }}
     >
       {showEditor && (
         <>
