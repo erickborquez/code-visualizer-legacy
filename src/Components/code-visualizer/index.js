@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 
 import CodeEditor from "../code-editor";
 import Visualizer from "../visualizer";
-import build from "../../Api/build";
+import build from "../../build-code";
 
 import useStep from "../../Hooks/useSteps";
 
