@@ -1,8 +1,6 @@
 {
-  "name": "el-algoritmo-del-ritmo",
+  "name": "code-visualizer",
   "version": "0.1.0",
-  "private": true,
-  "homepage": "https://erick.borquez.dev/code-visualizer",
   "dependencies": {
     "react": "^16.9.0",
     "react-ace": "^7.0.4",

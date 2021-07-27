@@ -1,8 +1,8 @@
 # Algorithm Visualizer
 
 Code visualizer improve algorithms and data structures understanding with visualization of data structures with minimum change to the code. Write an algorithm, add some lines of code and you're ready to go.
-To learn how to use you can read the README.md below or visite the homepage.
-[demo](https://erick.borquez.dev/code-visualizer/)
+To learn how to use you can read the README.md below or check the homepage.
+[demo](https://http://codevisualizer.com/)
 
 This project is based on [react-data-structures](https://github.com/ErickJoestar/react-data-structures) to visualize the data structures.
 
@@ -130,7 +130,7 @@ canvas.update();
 
 ## What structures are supported?
 
-Currently the application unly supports Arrays with one dimension and arrays with two dimensions.<br/>
+Currently the application only supports Arrays with one dimension and arrays with two dimensions.<br/>
 In the future im planning to add something like a **console** where the user can put messages.<br/>
 Every structure in [react-data-structures](https://github.com/ErickJoestar/react-data-structures) willl be supported in future updated.
 
