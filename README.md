@@ -2,7 +2,7 @@
 
 Code visualizer improve algorithms and data structures understanding with visualization of data structures with minimum change to the code. Write an algorithm, add some lines of code and you're ready to go.
 To learn how to use you can read the README.md below or check the homepage.
-[demo](https://http://codevisualizer.com/)
+[demo](https://codevisualizer.com/)
 
 This project is based on [react-data-structures](https://github.com/ErickJoestar/react-data-structures) to visualize the data structures.
 
